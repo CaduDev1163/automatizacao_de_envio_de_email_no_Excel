@@ -1,0 +1,111 @@
+📌 Projeto de Carlos Eduardo Gomes: Automação de envio para o Outlook, de tabelas específicas para e-mails específicos.
+
+1. Problema Inicial
+
+Em um arquivo Excel, diversos relatórios estavam sendo gerados e um por um eram enviados para diversos e-mails específicos tudo de maneira manual:
+
+1. O usuário seleciona um item na segmentação de dados (uma função própria do Excel).
+2. Relatório é gerado.
+3. Copia o relatório inteiro selecionando-o e usando o Ctrl + C.
+4. Abre o Outlook.
+5. Seleciona a assinatura específica
+6. Seleciona o e-mail especifico na qual será enviado o relatório especifico.
+7. Preenche as mesmas informações manualmente todas as vezes.
+8. Cola o relatório inteiro usando Ctrl + V
+8. Envia o e-mail.
+
+Esse processo:
+-> Consome muito tempo, pois em um dia devem ser enviados dezenas de relatórios.
+-> Depende de muita atenção do operador.
+-> Risco de perder o relatório no intermédio do processo entre copiar e colar.
+-> Relatório muitas as vezes pode ser uma tabela enorme de dezenas de linhas e colunas, aumentando o tempo até seleciona-lo por inteiro ou tendo que depender de atalho como o Ctrl + T dentro do Excel.
+-> Ter que sempre verificar antecipadamente qual e-mail específico será alocado ao relatório específico.
+
+---
+
+2. Objetivo do Projeto
+
+Automatizar o processo de enviar o relatório X para o e-mail X, e o relatório Y para o e-mail Y, reduzindo o tempo de operação do usuário, o uso de atalhos extremamente usuais, promovendo a lógica, a eficiência e agilidade em uma tarefa que é feita dezenas de vezes ao dia, resumindo todo um processo complexo em apenas selecionar o item da segmentação e clicar em um botão chamado "Enviar E-mail".
+
+---
+
+3. Arquitetura de Solução
+
+A solução foi feita em apenas um módulos, divididos em algumas funções no mesmo Modulo.
+
+🔹 VBA (Excel)
+Responsável por:
+-> Conectar ao Outlook
+-> Identificar o nome do item
+-> Copiar o relatório gerado, transformando em HTML e imprimindo no corpo de texto do e-mail
+-> Associando o item selecionado com o e-mail que deve ser enviado o relatório
+
+---
+
+4. Fluxo da Automação
+
+Etapa 1 - Leitura da Segmentação de Dados
+
+-> É desenvolvido uma função e chamada com o nome da variável na sub principal.
+-> Essa função identifica e guarda o nome do item contido na segmentação que foi selecionado, por exemplo: selecionado compras -> relatório de compras -> e-mail para os integrantes do setor de compras.
+-> Só pode ser selecionado um item da segmentação por vez.
+
+Etapa 2 - Conversão das tabelas para HTML
+
+-> É dimensionado a célula em que o relatório gerado se iniciará.
+-> É desenvolvido uma função que converte a estrutura do relatório em html, linguagem em que o Outlook compreende.
+-> Mantém o mesmo layout contido no Excel.
+
+Etapa 3 - Corpo de texto do e-mail
+-> Usando html somente, é desenvolvido textos automáticos para o campo de texto principal do Outlook.
+
+Etapa 4 - Configuração do e-mail.
+
+-> É acessado a planilha onde consiste todos os e-mails necessários.
+-> A lógica é aplicada aqui, o VBA identifica o item da segmentação selecionado e associa ao e-mail registrado nessa planilha.
+-> Copia o e-mail associado e cola no campo de texto onde é mencionado e-mails dentro do Outlook.
+
+-> Etapa 5 - Assinatura
+-> Esse processo é feito em uma função, usando formatação simples de HMTL.
+-> Permite uma mesma assinatura para todos os usuários, bastando apenas ter acesso ao arquivo Excel.
+
+Etapa 6 - Junção de tudo
+
+-> Outlook é aberto pelo VBA.
+-> O relatório + corpo de texto + assinatura são impressos no corpo de texto do e-mail.
+-> Destinatário é preenchido de acordo com a lógica.
+
+---
+
+ 5. Técnicas Utilizadas
+-> Desenvolvimento no VBA do Excel.
+-> Entendimento sobre o Outlook.
+-> Compreensão mais avançada das planilhas do Excel.
+
+---
+
+ 6. Benefícios Obtidos
+
+-> Redução significativa do tempo de operação.
+-> Eliminação de erros de digitação.
+-> Padronização do processo.
+-> Repetibilidade confiável.
+-> Estrutura reutilizável para outros processos.
+
+---
+
+ 7. Aplicabilidade
+
+A lógica pode ser aplicada em:
+
+-> Logística
+-> Controladoria
+-> Financeiro
+-> Produção
+-> Compras
+-> RH
+Qualquer setor que gere relatórios manuais.
+
+---
+
+
